@@ -26,6 +26,7 @@ gem 'cancancan', '~> 3.1'
 group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem "letter_opener"
 end
 
 group :development do
@@ -42,3 +43,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "tailwindcss-rails", "~> 2.6"
