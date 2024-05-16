@@ -10,5 +10,5 @@ class User < ApplicationRecord
          :lockable,
          :trackable
 
-  enum role: [:job_seeker, :employer, :admin]
+  enum role: [:freelancer, :employer, :admin]
 end

@@ -13,8 +13,7 @@
 
   <body>
 
-<!--      <p class="notice"><%#= notice %></p>-->
-<!--      <p class="alert"><%#= alert %></p>-->
+      <%= render "shared/navbar" %>
 
       <% if flash[:notice] %>
         <%= render partial: "shared/alerts", locals: { message: flash[:notice], type: "notice" } %>
@@ -25,5 +24,9 @@
 
 
     <%= yield %>
+
+    <div class="w-full" >
+      <%= render "shared/footer" %>
+    </div>
   </body>
 </html>
