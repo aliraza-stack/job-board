@@ -1,16 +1,31 @@
-<h2>Forgot your password?</h2>
+<section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
+    <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl mt-16">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Forgot Password?</h2>
+            <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 mb-4">Enter you password to get reset password instructions.</p>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+          <%= form_for(resource, as: resource_name, html: { class: "max-w-xl mx-auto mt-12" }, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+            <div class="flex md:flex-col gap-4 items-center sm:flex-row sm:justify-center">
+                <div class="flex-1 w-96 min-w-0 px-4 sm:px-0">
+                    <label for="email" class="sr-only"></label>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block w-full px-4 py-4 text-base text-black placeholder-gray-500 transition-all duration-200 border-transparent rounded-md caret-indigo-600 focus:border-indigo-600 focus:ring-1 focus:ring-indigo-600" %>
+                </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+                <%= f.submit "Reset password",  class: "inline-flex items-center justify-center w-auto px-4 py-4 mt-4 font-semibold text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md sm:ml-4 sm:mt-0 sm:w-auto hover:bg-indigo-700 focus:bg-indigo-700" %>
+            </div>
+          <% end %>
 
-<%= render "users/shared/links" %>
+
+        <div class="flex items-center justify-center px-8 mt-8 sm:px-0">
+            <%# <svg class="flex-shrink-0 w-5 h-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg> %>
+            <span class="ml-2 text-gray-600 flex flex-col items-center text-md">
+              <%= render "users/shared/links", links: ["login","signup"] %>
+            </span>
+        </div>
+    </div>
+</section>

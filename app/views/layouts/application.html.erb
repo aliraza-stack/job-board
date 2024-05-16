@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>JobBoard</title>
+    <title><%= "#{yield(:page_title)} - Job Board" || "Job Board" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -13,17 +13,19 @@
 
   <body>
 
-<!--      <p class="notice"><%#= notice %></p>-->
-<!--      <p class="alert"><%#= alert %></p>-->
+      <%= render "shared/navbar" %>
 
       <% if flash[:notice] %>
         <%= render partial: "shared/alerts", locals: { message: flash[:notice], type: "notice" } %>
       <% elsif flash[:alert] %>
         <%= render partial: "shared/alerts", locals: { message: flash[:alert], type: "alert" } %>
       <% end %>
-      <%#= render partial: "shared/alerts", locals: { message: flast[:notice] } %>
 
 
     <%= yield %>
+
+    <div class="w-full" >
+      <%= render "shared/footer" %>
+    </div>
   </body>
 </html>
