@@ -22,6 +22,7 @@ gem "devise"
 # gem "devise_masquerade"
 # gem "devise_security_extension"
 gem 'cancancan', '~> 3.1'
+gem "tailwindcss-rails", "~> 2.6"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
@@ -31,7 +32,7 @@ end
 
 group :development do
   gem "web-console"
-  gem "rack-mini-profiler"
+  # gem "rack-mini-profiler"
   gem "spring"
   gem "dotenv-rails"
   gem "better_errors"
@@ -43,4 +44,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-gem "tailwindcss-rails", "~> 2.6"
