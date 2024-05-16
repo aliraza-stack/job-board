@@ -4,15 +4,18 @@ Rails.application.routes.draw do
             path_names: {
               sign_in: 'login',
               sign_out: 'logout',
-              password: 'secret',
+              # password: 'secret',
               confirmation: 'verification',
               unlock: 'unblock',
-              registration: 'register',
+              # registration: 'register',
               sign_up: 'signup'
              },
             controllers: {
               sessions: 'users/sessions',
               registrations: 'users/registrations',
+              confirmations: 'users/confirmations',
+              unlocks: 'users/unlocks',
+              passwords: 'users/passwords'
             }
 
   get "up" => "rails/health#show", as: :rails_health_check

@@ -1,51 +1,6 @@
-<section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-          JOB BOARD
-      </a>
-      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Sign in to your account
-              </h1>
-              <%= form_for(resource, as: resource_name, html: { class: "space-y-4 md:space-y-6" },  url: session_path(resource_name)) do |f| %>
-
-                  <div>
-                      <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                      <%= f.email_field :email, id: "email", autofocus: true, autocomplete: "email", class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", placeholder: "name@company.com" %>
-                  </div>
-                  <div>
-                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                      <%= f.password_field :password, id: "password", placeholder: "••••••••", class: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-                  </div>
-                  <% if devise_mapping.rememberable? %>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                              <%= f.check_box :remember_me, id: "remember", class: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" %>
-                            </div>
-                            <div class="ml-3 text-sm">
-                              <%= f.label :remember_me, for: "remember", class: "text-gray-500 dark:text-gray-300" %>
-                            </div>
-                        </div>
-                        <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
-                    </div>
-                  <% end %>
-
-                  <%= f.submit "Sign In", class: "cursor-pointer w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
-                  <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                    <%= render "users/shared/links" %>
-                  </p>
-              <% end %>
-          </div>
-      </div>
-  </div>
-</section>
-
 <section class="bg-white">
     <div class="grid grid-cols-1 lg:grid-cols-2">
-        <div class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8">
+        <div class="relative flex items-end px-4 pb-10 pt-60 sm:pb-16 md:justify-center lg:pb-24 bg-gray-50 sm:px-6 lg:px-8 md:h-screen">
             <div class="absolute inset-0">
                 <img class="object-cover object-top w-full h-full" src="https://cdn.rareblocks.xyz/collection/celebration/images/signin/4/girl-thinking.jpg" alt="" />
             </div>
@@ -95,9 +50,10 @@
         <div class="flex items-center justify-center px-4 py-10 bg-white sm:px-6 lg:px-8 sm:py-16 lg:py-24">
             <div class="xl:w-full xl:max-w-sm 2xl:max-w-md xl:mx-auto">
                 <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl">Sign in to Celebration</h2>
-                <p class="mt-2 text-base text-gray-600">Don’t have an account? <a href="#" title="" class="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline">Create a free account</a></p>
+                <p class="mt-2 text-base text-gray-600">Don’t have an account? <%= render "users/shared/links", links: ["signup"] %> </p>
 
-                <form action="#" method="POST" class="mt-8">
+              <%= form_for(resource, as: resource_name, html: { class: "mt-8" }, url: session_path(resource_name)) do |f| %>
+
                     <div class="space-y-5">
                         <div>
                             <label for="" class="text-base font-medium text-gray-900"> Email address </label>
@@ -107,14 +63,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                                     </svg>
                                 </div>
-
-                                <input
-                                    type="email"
-                                    name=""
-                                    id=""
-                                    placeholder="Enter email to get started"
-                                    class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
-                                />
+                                <%= f.email_field :email, id: "email", autofocus: true, autocomplete: "email", class: "block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600", placeholder: "name@company.com" %>
                             </div>
                         </div>
 
@@ -122,7 +71,7 @@
                             <div class="flex items-center justify-between">
                                 <label for="" class="text-base font-medium text-gray-900"> Password </label>
 
-                                <a href="#" title="" class="text-sm font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline"> Forgot password? </a>
+                                <%# <a href="#" title="" class="text-sm font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline"> Forgot password? </a> %>
                             </div>
                             <div class="mt-2.5 relative text-gray-400 focus-within:text-gray-600">
                                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -135,27 +84,30 @@
                                         />
                                     </svg>
                                 </div>
-
-                                <input
-                                    type="password"
-                                    name=""
-                                    id=""
-                                    placeholder="Enter your password"
-                                    class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600"
-                                />
+                                <%= f.password_field :password, id: "password", placeholder: "••••••••", class: "block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600" %>
                             </div>
                         </div>
 
+                        <% if devise_mapping.rememberable? %>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                    <%= f.check_box :remember_me, id: "remember", class: "checkbox checkbox-sm" %>
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                    <%= f.label :remember_me, for: "remember", class: "text-gray-600 dark:text-gray-500" %>
+                                    </div>
+                                </div>
+                                <%# <a href="#" class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a> %>
+                                <%= render "users/shared/links", links: ["forgot"] %>
+                            </div>
+                        <% end %>
+
                         <div>
-                            <button
-                                type="submit"
-                                class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:opacity-80 focus:opacity-80"
-                            >
-                                Log in
-                            </button>
+                            <%= f.submit "Log in", class: "cursor-pointer inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 border border-transparent rounded-md bg-gradient-to-r from-fuchsia-600 to-blue-600 focus:outline-none hover:opacity-80 focus:opacity-80" %>
                         </div>
                     </div>
-                </form>
+                <% end %>
 
                 <div class="mt-3 space-y-3">
                     <button

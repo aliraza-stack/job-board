@@ -20,7 +20,6 @@
       <% elsif flash[:alert] %>
         <%= render partial: "shared/alerts", locals: { message: flash[:alert], type: "alert" } %>
       <% end %>
-      <%#= render partial: "shared/alerts", locals: { message: flast[:notice] } %>
 
 
     <%= yield %>
