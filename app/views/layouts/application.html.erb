@@ -13,8 +13,15 @@
 
   <body>
 
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+<!--      <p class="notice"><%#= notice %></p>-->
+<!--      <p class="alert"><%#= alert %></p>-->
+
+      <% if flash[:notice] %>
+        <%= render partial: "shared/alerts", locals: { message: flash[:notice], type: "notice" } %>
+      <% elsif flash[:alert] %>
+        <%= render partial: "shared/alerts", locals: { message: flash[:alert], type: "alert" } %>
+      <% end %>
+      <%#= render partial: "shared/alerts", locals: { message: flast[:notice] } %>
 
 
     <%= yield %>
