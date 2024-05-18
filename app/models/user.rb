@@ -10,5 +10,20 @@ class User < ApplicationRecord
          :lockable,
          :trackable
 
-  enum role: [:freelancer, :employer, :admin]
+  enum role: { admin: 'admin', employer: 'employer', freelancer: 'freelancer' }
+
+  validates :role, presence: true
+
+  def admin?
+    role == 'admin'
+  end
+
+  def employer?
+    role == 'employer'
+  end
+
+  def freelancer?
+    role == 'freelancer'
+  end
+
 end
