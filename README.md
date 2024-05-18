@@ -37,12 +37,13 @@ Follow these steps to set up the project on your local machine.
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/job-board.git
+   git clone https://github.com/aliraza-stack/job-board.git
    cd job-board
     ```
 2. **Install the dependencies:**
     ```bash
     bundle install
+    yarn install
     ```
 3. **Set up the database:**
     ```bash
