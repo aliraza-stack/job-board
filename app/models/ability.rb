@@ -9,9 +9,12 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.employer?
-      can :manage, JobListing, user_id: user.id
+      can :read, :all
+      can :manage, Job, user_id: user.id
+    elsif user.freelancer?
+      can :read, Job
     else
-      can :read, JobListing
+      can :read, :all
     end
     # Define abilities for the user here. For example:
     #

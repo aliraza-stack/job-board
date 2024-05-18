@@ -1,0 +1,2 @@
+module Freelancer::DashboardHelper
+end

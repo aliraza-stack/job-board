@@ -61,6 +61,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
+  # def after_sign_in_path_for(resource)
+  #   if resource.admin?
+  #     admin_dashboard_path
+  #   elsif resource.employer?
+  #     employer_dashboard_path
+  #   elsif resource.freelancer?
+  #     freelancer_dashboard_path
+  #   else
+  #     root_path
+  #   end
+  # end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
