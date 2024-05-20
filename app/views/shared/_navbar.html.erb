@@ -31,8 +31,11 @@
                     <% if user_signed_in? %>
                       <%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { "turbo-method": :delete }, class: "hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-yellow-300 hover:text-black focus:text-black focus:bg-yellow-300 font-semibold text-white bg-black rounded-full", role: "button" %>
                     <% else %>
-                      <%# link_to "Log in", new_user_session_path, class: "hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-yellow-300 hover:text-black focus:text-black focus:bg-yellow-300 font-semibold text-white bg-black rounded-full"%>
-                      <%= link_to "Sign up", new_user_registration_path, class: "hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-yellow-300 hover:text-black focus:text-black focus:bg-yellow-300 font-semibold text-white bg-black rounded-full"%>
+                        <% if current_page?(new_user_registration_path) %>
+                            <%= link_to "Log in", new_user_session_path, class: "hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-yellow-300 hover:text-black focus:text-black focus:bg-yellow-300 font-semibold text-white bg-black rounded-full" %>
+                        <% else %>
+                            <%= link_to "Sign up", new_user_registration_path, class: "hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-yellow-300 hover:text-black focus:text-black focus:bg-yellow-300 font-semibold text-white bg-black rounded-full"%>
+                      <% end %>
                     <% end %>
                 <%# <a href="#" title="" class="hidden lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-yellow-300 hover:text-black focus:text-black focus:bg-yellow-300 font-semibold text-white bg-black rounded-full" role="button"> Join Now </a> %>
             </div>

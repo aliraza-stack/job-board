@@ -14,12 +14,7 @@
   <body>
 
       <%= render "shared/navbar" %>
-
-      <% if flash[:notice] %>
-        <%= render partial: "shared/alerts", locals: { message: flash[:notice], type: "notice" } %>
-      <% elsif flash[:alert] %>
-        <%= render partial: "shared/alerts", locals: { message: flash[:alert], type: "alert" } %>
-      <% end %>
+      <%= render "shared/alerts" %>
 
 
     <%= yield %>
