@@ -10,4 +10,4 @@
 
 User.create!(email: 'admin@job.com', password: 'password', password_confirmation: 'password', role: 'admin')
 User.create!(email: 'employer@job.com', password: 'password', password_confirmation: 'password', role: 'employer')
-User.create!(email: 'seeker@job.com', password: 'password', password_confirmation: 'password', role: 'freelancer')
+User.create!(email: 'freelancer@job.com', password: 'password', password_confirmation: 'password', role: 'freelancer')
