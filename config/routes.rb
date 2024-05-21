@@ -33,6 +33,6 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#index'
   end
 
-  match '*path', to: 'application#route_not_found', via: :all
+  # match '*path', to: 'application#route_not_found', via: :all
 
 end
