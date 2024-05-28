@@ -7,7 +7,8 @@ Rails.application.routes.draw do
               confirmation: 'verification',
               unlock: 'unblock',
               # registration: 'register',
-              sign_up: 'signup'
+              sign_up: 'signup',
+              edit: 'settings'
              },
             controllers: {
               sessions: 'users/sessions',

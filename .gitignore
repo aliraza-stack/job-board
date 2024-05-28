@@ -39,5 +39,6 @@
 
 node_modules/*
 .idea/*
-/app/assets/builds/tailwind.css
+
+config/credentials.yml.enc
 app/assets/builds/tailwind.css

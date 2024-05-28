@@ -45,6 +45,8 @@
           <li>
             <a href="/" data-action="dropdowns#toggle" class="block px-4 py-2 text-sm text-gray-700
             hover:bg-gray-100">Dashboard</a>
+            <%= link_to "Profile", edit_user_registration_path, "data-action": "dropdowns#toggle", class: "block px-4 py-2 text-sm text-gray-700
+            hover:bg-gray-100" %>
             <%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { "turbo-method": :delete },
                         class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "button",
                         "data-action": "dropdowns#toggle" %>

@@ -16,13 +16,14 @@ gem 'actionmailer'
 # gem "bcrypt", "~> 3.1.7"
 gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 gem "bootsnap", require: false
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 gem "devise"
 # gem "devise-i18n"
 # gem "devise_masquerade"
 # gem "devise_security_extension"
 gem 'cancancan', '~> 3.1'
 gem "tailwindcss-rails", "~> 2.6"
+# gem 'mini_magick'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
