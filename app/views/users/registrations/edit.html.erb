@@ -1,169 +1,140 @@
-<div class="h-screen flex justify-center items-center flex-col">
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<% content_for :page_title, "Settings" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<div data-controller="tabs" class="bg-white w-full pt-12 flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
+  <aside class="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
+    <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
+      <h2 class="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
+      <a href="?tab=profile" data-action="click->tabs#changeTab" data-tab="profile" class="flex items-center px-3 py-2.5 font-bold bg-white hover:text-indigo-900 hover:border hover:rounded-full">
+        Public Profile
+      </a>
+      <a href="?tab=accounts" data-action="click->tabs#changeTab" data-tab="accounts" class="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
+        Account Settings
+      </a>
+      <a href="?tab=notifications" data-action="click->tabs#changeTab" data-tab="notifications" class="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full">
+        Notifications
+      </a>
+    </div>
+  </aside>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
-</div>
-
-
-
-
-<div class="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931]">
-    <aside class="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
-        <div class="sticky flex flex-col gap-2 p-4 text-sm border-r border-indigo-100 top-12">
-
-            <h2 class="pl-3 mb-4 text-2xl font-semibold">Settings</h2>
-
-            <a href="#" class="flex items-center px-3 py-2.5 font-bold bg-white  text-indigo-900 border rounded-full">
-                Pubic Profile
-            </a>
-            <a href="#"
-                class="flex items-center px-3 py-2.5 font-semibold  hover:text-indigo-900 hover:border hover:rounded-full">
-                Account Settings
-            </a>
-            <a href="#"
-                class="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full  ">
-                Notifications
-            </a>
-            <a href="#"
-                class="flex items-center px-3 py-2.5 font-semibold hover:text-indigo-900 hover:border hover:rounded-full  ">
-                PRO Account
-            </a>
+  <main class="w-full py-1 ">
+    <div class="p-2 md:p-4">
+      <div id="profile"  data-tabs-target="tabContent" class="hidden">
+        <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+          <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
+          <!-- Your Public Profile form goes here -->
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+            <div class="grid max-w-2xl mx-auto mt-8">
+              <div class="flex flex-col items-center justify-center space-y-5 sm:flex-row sm:space-y-0">
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag current_user.avatar.variant(resize_to_fill: [300, 300]), class: "object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500", alt: "User Avatar" %>
+                <% else %>
+                  <%= image_tag "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60", class: "object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500", alt: "Default Avatar" %>
+                <% end %>
+                <%= f.file_field :avatar, class: "opacity-0 cursor-pointer absolute object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300" %>
+              </div>
+              <div class="items-center mt-8 sm:mt-14 text-[#202142]">
+                <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                  <div class="w-full">
+                    <label for="first_name" class="block mb-2 text-sm font-medium text-indigo-900">Your first name</label>
+                    <%= f.text_field :first_name, id: "first_name", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "Your first name" %>
+                  </div>
+                  <div class="w-full">
+                    <label for="last_name" class="block mb-2 text-sm font-medium text-indigo-900">Your last name</label>
+                    <%= f.text_field :last_name, id: "last_name", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "Your last name" %>
+                  </div>
+                </div>
+                <div class="mb-2 sm:mb-6">
+                  <label for="email" class="block mb-2 text-sm font-medium text-indigo-900">Your email</label>
+                  <%= f.email_field :email, id:"email", autofocus: true, class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "your.email@mail.com" %>
+                </div>
+                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                <% end %>
+                <div class="mb-2 sm:mb-6">
+                  <label for="profession" class="block mb-2 text-sm font-medium text-indigo-900">Profession</label>
+                  <%= f.text_field :profession, id: "profession", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder:"your profession" %>
+                </div>
+                <div class="mb-6">
+                  <label for="message" class="block mb-2 text-sm font-medium text-indigo-900">Bio</label>
+                  <%= f.text_area :bio, rows: "4", class: "block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500", placeholder: "Write your bio here..." %>
+                </div>
+                <div class="mb-2 sm:mb-6">
+                  <label for="current_password" class="block mb-2 text-sm font-medium text-red-900">Current Password</label>
+                  <%= f.password_field :current_password, id:"current_password", class: "bg-red-50 border border-red-300 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5", placeholder: "Current password required to save changes" %>
+                </div>
+                <div class="flex justify-end">
+                  <%= f.submit "Apply Changes", class: "cursor-pointer text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800" %>
+                </div>
+              </div>
+            </div>
+          <% end %>
         </div>
-    </aside>
-    <main class="w-full min-h-screen py-1 md:w-2/3 lg:w-3/4">
-        <div class="p-2 md:p-4">
-            <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
-                <h2 class="pl-6 text-2xl font-bold sm:text-xl">Public Profile</h2>
+      </div>
+      <div id="accounts" data-tabs-target="tabContent" class="hidden">
+        <div class="w-full px-6 pb-8 mt-8 sm:max-w-7xl sm:rounded-lg">
+            <h2 class="pl-6 text-2xl font-bold sm:text-xl">Account Settings</h2>
+            <!-- Your Account Settings content goes here -->
+            <%= render "users/registrations/chnage_password" %>
 
-              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-              <%= render "users/shared/error_messages", resource: resource %>
-
-                <div class="grid max-w-2xl mx-auto mt-8">
-                    <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
-
-                        <% if current_user.avatar.attached? %>
-                          <%= image_tag current_user.avatar.variant(resize_to_fill: [300, 300]), class: "object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500", alt: "User Avatar" %>
-                        <% else %>
-                          <%= image_tag "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60", class: "object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500", alt: "Default Avatar" %>
-                        <% end %>
-
-                        <div class="flex flex-col space-y-5 sm:ml-8">
-                            <%= f.file_field :avatar, class: "py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 " %>
-                            <%# <button type="button"
-                                class="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
-                                Change picture
-                            </button> %>
-                            <button type="button"
-                                class="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
-                                Delete picture
-                            </button>
-                        </div>
+            <%# Delete account %>
+            <div class="mx-auto mt-6" id="drop" data-controller="hello" >
+                <div class="flex flex-col justify-center px-4 space-y-4 antialiased text-gray-90">
+                    <div class="flex justify-between w-full px-8 max-w-7xl space-y-6 bg-red-200 rounded-md py-16 border border-gray-200">
+                    <div>
+                        <h1 class=" mb-2 text-3xl font-bold ">Do you wanted to delete you account?</h1>
+                        <p class="">Your account will be deleted permanently.</p>
+                    </div>
+                    <div>
+                        <a href="#" id="delete" data-action="click->hello#delete" class="w-full px-4 py-2 font-medium text-center text-white bg-red-600 transition-colors duration-200 rounded-md bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1"">
+                            Delete Permanently
+                        </a>
                     </div>
 
-                    <div class="items-center mt-8 sm:mt-14 text-[#202142]">
-
-                        <div
-                            class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                            <div class="w-full">
-                                <label for="first_name"
-                                    class="block mb-2 text-sm font-medium text-indigo-900">Your
-                                    first name</label>
-                                <%= f.text_field :first_name, id: "first_name",
-                                    class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 ",
-                                    placeholder: "Your first name" %>
-                            </div>
-
-                            <div class="w-full">
-                                <label for="last_name"
-                                    class="block mb-2 text-sm font-medium text-indigo-900">Your
-                                    last name</label>
-                                <%= f.text_field :last_name, id: "last_name",
-                                    class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 ",
-                                    placeholder: "Your last name" %>
-                            </div>
-
-                        </div>
-
-                        <div class="mb-2 sm:mb-6">
-                            <label for="email"
-                                class="block mb-2 text-sm font-medium text-indigo-900">Your email</label>
-                                <%= f.email_field :email, id:"email",
-                                class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 ",
-                                placeholder: "your.email@mail.com" %>
-                        </div>
-
-                        <div class="mb-2 sm:mb-6">
-                            <label for="profession"
-                                class="block mb-2 text-sm font-medium text-indigo-900">Profession</label>
-                            <%= f.text_field :profession, id: "profession",
-                                class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 ",
-                                placeholder:"your profession" %>
-                        </div>
-
-                        <div class="mb-6">
-                            <label for="message"
-                                class="block mb-2 text-sm font-medium text-indigo-900">Bio</label>
-                            <%= f.text_area :bio, rows: "4",
-                                class: "block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500 ",
-                                placeholder: "Write your bio here..." %>
-                        </div>
-
-                        <div class="mb-2 sm:mb-6">
-                            <label for="email"
-                                class="block mb-2 text-sm font-medium text-red-900">Current Password</label>
-                                <%= f.password_field :current_password, id:"current_password",
-                                class: "bg-red-50 border border-red-300 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 ",
-                                placeholder: "Current password required to save changes" %>
-                        </div>
-
-                        <div class="flex justify-end">
-                          <%= f.submit "Save", class: "text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"%>
-                        </div>
-
+                    <%# <div class="text-sm text-gray-600 items-center flex justify-between">
+                        <p class="text-gray-800 cursor-pointer hover:text-blue-500 inline-flex items-center ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                            d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd" />
+                        </svg>
+                        Back</p>
+                        <p class="hover:text-blue-500 cursor-pointer">Need help?</p>
+                    </div> %>
                     </div>
                 </div>
-              <% end %>
             </div>
         </div>
-    </main>
+      </div>
+      <div id="notifications" data-tabs-target="tabContent" class="hidden">
+        <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
+            <h2 class="pl-6 text-2xl font-bold sm:text-xl">Notifications</h2>
+            <!-- Your Notifications content goes here -->
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
+
+
+
+<%= render "users/shared/popup" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%#= link_to "Back", :back %>

@@ -8,10 +8,15 @@
 
 
       <% if user_signed_in? %>
-        <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
+        <button type="button" class="flex text-sm bg-gray-200 pr-6 pl-3 py-1 gap-4 items-center rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
                 id="user-menu-button" aria-expanded="false" data-action="click->dropdowns#toggle">
           <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/logo.svg" alt="user photo">
+          <% if current_user && current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full", alt: current_user.profession %>
+          <% else %>
+            <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/logo.svg" alt="user photo">
+          <% end %>
+            <%= current_user.first_name + " " + current_user.last_name%>
         </button>
       <% else %>
           <%= link_to "Sign up", new_user_registration_path, class: "lg:inline-flex items-center justify-center px-5
@@ -27,9 +32,7 @@
 
       <!-- Dropdown menu -->
       <div
-        class="transition transform origin-top-right absolute min-w-56 right-0 top-6 z-50 hidden my-4 text-base
-        list-none
-        bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown"
+        class="transition transform origin-top-right absolute min-w-56 right-0 top-7 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown"
         data-dropdowns-target="menu"
         data-action="click@window->dropdowns#hide"
         data-transition-enter-from="opacity-0 scale-95"
@@ -38,40 +41,34 @@
         data-transition-leave-to="opacity-0 scale-95"
       >
         <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900"><%= current_user.role.capitalize if current_user%></span>
+          <span class="block text-sm text-gray-900"><%= current_user.role.capitalize if current_user %></span>
           <span class="block text-sm text-gray-500 truncate"><%= current_user.email if current_user %></span>
         </div>
-        <ul class="py-2" aria-labelledby="user-menu-button">
+        <ul class="" aria-labelledby="user-menu-button">
           <li>
-            <a href="/" data-action="dropdowns#toggle" class="block px-4 py-2 text-sm text-gray-700
-            hover:bg-gray-100">Dashboard</a>
-            <%= link_to "Profile", edit_user_registration_path, "data-action": "dropdowns#toggle", class: "block px-4 py-2 text-sm text-gray-700
-            hover:bg-gray-100" %>
-            <%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { "turbo-method": :delete },
-                        class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "button",
-                        "data-action": "dropdowns#toggle" %>
+            <%= link_to "Profile", edit_user_registration_path + "?tab=profile", "data-action": "dropdowns#toggle", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+            <%= link_to "Account Settings", edit_user_registration_path + "?tab=accounts", "data-action": "dropdowns#toggle", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+            <%= link_to "Notifications", edit_user_registration_path + "?tab=notifications", "data-action": "dropdowns#toggle", class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+          </li>
+          <hr class="border-gray-100">
+          <li>
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete, data: { "turbo-method": :delete }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100", role: "button", "data-action": "dropdowns#toggle" %>
           </li>
         </ul>
       </div>
-      <button data-action="dropdowns#toggle click@window->dropdowns#hide" data-collapse-toggle="navbar-user"
-              type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false">
+      <button data-action="dropdowns#toggle click@window->dropdowns#hide" data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-        </svg>
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/></svg>
       </button>
     </div>
 
 
     <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-      <ul class="text-black flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50
-      md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white">
+      <ul class="text-black flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 md:flex-row md:mt-0 md:border-0 md:bg-white">
         <% if user_signed_in? %>
+          <li><%= link_to "Dashboard", root_path, class: "block py-2 px-3 text-black bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0"%></li>
         <% else %>
-          <li>
-            <a href="/" class="block py-2 px-3 text-black bg-blue-700 rounded md:bg-transparent md:text-blue-700
-          md:p-0" aria-current="page">Home</a>
-          </li>
+          <li><a href="/" class="block py-2 px-3 text-black bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0" aria-current="page"></a></li>
         <% end %>
       </ul>
     </div>
