@@ -86,9 +86,8 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-RUN bundle install --deployment --without development test
+#ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+ENTRYPOINT ["bundle", "exec"]
 
 # Expose the application server port
 EXPOSE 3000
