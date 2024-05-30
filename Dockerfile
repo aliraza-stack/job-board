@@ -30,6 +30,7 @@ RUN bundle install && \
 COPY . .
 COPY yarn.lock package.json ./
 RUN yarn install
+RUN npx update-browserslist-db@latest
 RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 FROM base
