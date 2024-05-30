@@ -40,7 +40,7 @@
 node_modules/*
 .idea/*
 
-config/credentials.yml.enc
+# config/credentials.yml.enc
 app/assets/builds/tailwind.css
 
 Dockerfile
