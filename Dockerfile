@@ -39,9 +39,6 @@ RUN npm install -g yarn
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler:2.5.5
-RUN bundle install && \
-    bundle exec bootsnap precompile --gemfile && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}/ruby/*/cache" "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git"
 
 # Copy application code
 COPY . .
@@ -79,6 +76,11 @@ RUN chmod +x /rails/bin/docker-entrypoint
 RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp node_modules /rails /usr/local/bundle
 USER rails:rails
+
+RUN bundle install && \
+    bundle exec bootsnap precompile --gemfile && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}/ruby/*/cache" "${BUNDLE_PATH}/ruby/*/bundler/gems/*/.git"
+
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
