@@ -16,23 +16,20 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development test"
+    BUNDLE_WITHOUT="development:test"
 
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config curl
-
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config libssl-dev zlib1g-dev curl && \
+        rm -rf /var/lib/apt/lists/*
 ENV NODE_VERSION=16.13.0
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-ENV NVM_DIR=/root/.nvm
-RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
-RUN node --version
-RUN npm --version
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash && \
+    . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION} && \
+    . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION} && \
+    . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
 
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # Copy Node.js and Yarn from the Node image
 COPY --from=node /usr/local/bin/node /usr/local/bin/
@@ -44,7 +41,7 @@ RUN npm install -g yarn
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler:2.5.5
 RUN bundle install && \
-   rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
 # Copy application code
@@ -57,12 +54,8 @@ RUN yarn install
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
-# RUN bin/rails credentials:edit
-
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
- RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-
+# RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 # Final stage for app image
 FROM base
@@ -72,7 +65,7 @@ WORKDIR /rails
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
+    apt-get install --no-install-recommends -y curl postgresql-client build-essential git libpq-dev libvips pkg-config libssl-dev zlib1g-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
@@ -87,7 +80,6 @@ USER rails:rails
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-#ENTRYPOINT ["bundle", "exec"]
 
 # Expose the application server port
 EXPOSE 3000
