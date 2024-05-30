@@ -18,9 +18,6 @@ gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 gem "devise"
-# gem "devise-i18n"
-# gem "devise_masquerade"
-# gem "devise_security_extension"
 gem 'cancancan', '~> 3.1'
 gem "tailwindcss-rails", "~> 2.6"
 # gem 'mini_magick'
@@ -28,21 +25,21 @@ gem "foreman"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
-  # gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
-  # gem "letter_opener"
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem "letter_opener"
 end
 
 group :development do
   gem "web-console"
-  # gem "rack-mini-profiler"
+  gem "rack-mini-profiler"
   gem "spring"
   gem "dotenv-rails"
-  # gem "better_errors"
-  # gem "binding_of_caller"
-  # gem 'pry-rails'
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'pry-rails'
 end
 
 group :test do
-  # gem "capybara"
-  # gem "selenium-webdriver"
+  gem "capybara"
+  gem "selenium-webdriver"
 end
