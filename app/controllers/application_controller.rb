@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    protect_from_forgery with: :exception
+    protect_from_forgery
     # before_action :redirect_logged_in_user, only: [:index]
 
 
