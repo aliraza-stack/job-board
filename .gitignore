@@ -43,5 +43,5 @@ node_modules/*
 # config/credentials.yml.enc
 app/assets/builds/tailwind.css
 
-Dockerfile
-docker-compose.yml
+# Dockerfile
+# docker-compose.yml
