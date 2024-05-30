@@ -28,8 +28,8 @@ gem "foreman"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
-  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
-  gem "letter_opener"
+  # gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  # gem "letter_opener"
 end
 
 group :development do
@@ -37,12 +37,12 @@ group :development do
   # gem "rack-mini-profiler"
   gem "spring"
   gem "dotenv-rails"
-  gem "better_errors"
-  gem "binding_of_caller"
-  gem 'pry-rails'
+  # gem "better_errors"
+  # gem "binding_of_caller"
+  # gem 'pry-rails'
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
+  # gem "capybara"
+  # gem "selenium-webdriver"
 end
