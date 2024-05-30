@@ -16,9 +16,7 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT=""
-
-
+    BUNDLE_WITHOUT="development test"
 
 
 # Install packages needed to build gems
@@ -89,9 +87,6 @@ USER rails:rails
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Entrypoint prepares the database
-ENTRYPOINT ["bundle", "exec"]
 
 # Expose the application server port
 EXPOSE 3000

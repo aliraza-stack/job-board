@@ -24,6 +24,7 @@ gem "devise"
 gem 'cancancan', '~> 3.1'
 gem "tailwindcss-rails", "~> 2.6"
 # gem 'mini_magick'
+gem "foreman"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
