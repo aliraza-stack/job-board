@@ -44,7 +44,7 @@ RUN npm install -g yarn
 COPY Gemfile Gemfile.lock ./
 RUN gem install bundler:2.5.5
 RUN bundle install && \
-#   rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+   rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
 # Copy application code
@@ -87,6 +87,8 @@ USER rails:rails
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+RUN bundle install --deployment --without development test
 
 # Expose the application server port
 EXPOSE 3000
