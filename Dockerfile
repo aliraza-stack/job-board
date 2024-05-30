@@ -72,7 +72,7 @@ COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
 # Copy the entrypoint script
-COPY docker-entrypoint /rails/bin/docker-entrypoint
+#COPY docker-entrypoint /rails/bin/docker-entrypoint
 RUN chmod +x /rails/bin/docker-entrypoint
 
 # Run and own only the runtime files as a non-root user for security
