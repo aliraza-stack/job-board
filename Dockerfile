@@ -61,9 +61,6 @@ RUN npx update-browserslist-db@latest
 # Remove the server.pid if it exists to avoid potential issues
 RUN rm -f tmp/pids/server.pid
 
-# Ensure logs are not accessible by others
-RUN chmod 640 log/*
-
 # Expose the port that Puma is bound to
 EXPOSE 3000
 
