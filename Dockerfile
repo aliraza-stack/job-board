@@ -30,7 +30,6 @@ RUN bundle install && \
 COPY . .
 COPY yarn.lock package.json ./
 RUN yarn install
-RUN npx update-browserslist-db@latest
 RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 FROM base
@@ -47,6 +46,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development:test"
+RUN npx update-browserslist-db@latest
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 EXPOSE 3000
 CMD ["./bin/dev"]
