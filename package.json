@@ -3,6 +3,7 @@
     "daisyui": "^4.11.1"
   },
   "dependencies": {
+    "caniuse-lite": "^1.0.30001627",
     "postcss": "^8.4.38"
   }
 }
