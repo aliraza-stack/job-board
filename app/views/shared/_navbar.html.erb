@@ -10,12 +10,12 @@
       <% if user_signed_in? %>
         <button type="button" class="flex text-sm bg-gray-200 pr-6 pl-3 py-1 gap-4 items-center rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 hover:ring-base-300" id="user-menu-button" aria-expanded="false" data-action="click->dropdowns#toggle">
           <span class="sr-only">Open user menu</span>
-          <% if current_user.avatar.attached? %>
+          <% if 1==2 %>
             <%= image_tag current_user.avatar, class: "w-8 h-8 rounded-full", alt: current_user.profession %>
           <% else %>
-            <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/logo.svg" alt="user photo">
+            <%= image_tag "default.avif", class: "w-8 h-8 rounded-full", alt: "default" %>
           <% end %>
-            <%= full_name %>
+            <%# full_name %>
         </button>
       <% else %>
           <%= link_to "Sign up", new_user_registration_path, class: "lg:inline-flex items-center justify-center px-5 py-2.5 text-base transition-all duration-200 hover:bg-yellow-300 hover:text-black focus:text-black focus:bg-yellow-300 font-semibold text-black bg-white rounded-full"%>

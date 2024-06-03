@@ -10,15 +10,17 @@ class User < ApplicationRecord
          :lockable,
          :trackable
 
-  enum role: { admin: 'admin', employer: 'employer', freelancer: 'freelancer' }
+  has_one :user_detail, dependent: :destroy
+  has_one :address, dependent: :destroy
+
+  accepts_nested_attributes_for :user_detail
+  accepts_nested_attributes_for :address
+
   has_one_attached :avatar
 
+  enum role: { admin: 'admin', employer: 'employer', freelancer: 'freelancer' }
+
   validates :role, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :profession, presence: true
-  validates :bio, presence: true
-  validates :avatar, presence: true
 
   def admin?
     role == 'admin'
