@@ -60,11 +60,14 @@
                 </div>
                 <div class="mb-2 sm:mb-6">
                   <label for="birthday" class="block mb-2 text-sm font-medium text-indigo-900">Birthday</label>
-                  <%= detail_form.date_select :birthday, id: "birthday", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder:"Birthday" %>
+                  <div class="flex w-full">
+                    <%= detail_form.date_select(:birthday, html_options = {class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"}) %>
+                  </div>
                 </div>
                 <div class="mb-2 sm:mb-6">
                   <label for="gender" class="block mb-2 text-sm font-medium text-indigo-900">Gender</label>
-                  <%= detail_form.select :gender, options_for_select([["Male", "male"], ["Female", "female"], ["Other", "other"]]), id: "gender", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder:"Gender" %>
+                  <%= detail_form.select :gender, options_for_select(UserDetail.genders.keys.map { |gender| [gender.titleize, gender] }, current_user.user_detail.gender),
+                    { include_blank: 'Select Gender' }, { class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" } %>
                 </div>
                 <div class="mb-2 sm:mb-6">
                   <label for="phone_number" class="block mb-2 text-sm font-medium text-indigo-900">Phone Number</label>

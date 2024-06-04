@@ -19,8 +19,11 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   enum role: { admin: 'admin', employer: 'employer', freelancer: 'freelancer' }
+  DETAIL_ATTRIBUTES = %w[first_name last_name phone_number birthday gender profession bio].freeze
 
   validates :role, presence: true
+  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true, length: { minimum: 8 }, on: :create
 
   def admin?
     role == 'admin'
@@ -32,6 +35,18 @@ class User < ApplicationRecord
 
   def freelancer?
     role == 'freelancer'
+  end
+
+  def profile_complete?
+    user_detail? && address?
+  end
+
+  def user_detail?
+    DETAIL_ATTRIBUTES.all? { |attr| user_detail.send(attr).present? }
+  end
+
+  def address?
+    address&.city.present? && address&.state.present? && address&.country.present? && address&.zip_code.present?
   end
 
 end

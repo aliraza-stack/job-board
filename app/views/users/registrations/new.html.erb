@@ -17,8 +17,7 @@
                       <%= f.select :role,
                           options_for_select(User.roles.keys.map { |role| [role.titleize, role] }),
                           { include_blank: 'Select Role' },
-                          { class: "block w-full px-4 text-black placeholder-gray-500 transition-all duration-200
-                          border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600" } %>
+                          { class: "block w-full px-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600" } %>
 
                     </div>
 

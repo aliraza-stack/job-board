@@ -5,6 +5,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
   before_action :build_user_detail, only: [:edit]
   before_action :build_address, only: [:edit]
+  skip_before_action :check_profile_completion, only: :update
+
 
   # GET /resource/sign_up
   # def new
@@ -108,5 +110,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def build_address
     resource.build_address unless resource.address
+  end
+
+  def after_update_path_for(resource)
+    edit_user_registration_path
   end
 end
