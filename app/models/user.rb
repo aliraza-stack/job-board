@@ -19,7 +19,6 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   enum role: { admin: 'admin', employer: 'employer', freelancer: 'freelancer' }
-  DETAIL_ATTRIBUTES = %w[first_name last_name phone_number birthday gender profession bio].freeze
 
   validates :role, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -42,11 +41,20 @@ class User < ApplicationRecord
   end
 
   def user_detail?
-    DETAIL_ATTRIBUTES.all? { |attr| user_detail.send(attr).present? }
+    user_detail&.first_name.present? &&
+    user_detail&.last_name.present? &&
+    user_detail&.phone_number.present? &&
+    user_detail&.birthday.present? &&
+    user_detail&.profession.present? &&
+    user_detail&.bio.present? &&
+    user_detail&.gender.present?
   end
 
   def address?
-    address&.city.present? && address&.state.present? && address&.country.present? && address&.zip_code.present?
+    address&.city.present? &&
+    address&.state.present? &&
+    address&.country.present? &&
+    address&.zip_code.present?
   end
 
 end

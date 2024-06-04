@@ -37,72 +37,72 @@
                 <%= f.fields_for :user_detail do |detail_form| %>
                 <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
                   <div class="w-full">
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-indigo-900">Your first name</label>
-                    <%= detail_form.text_field :first_name, id: "first_name", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "Your first name" %>
+                    <label for="first_name" class="profile-label">Your first name</label>
+                    <%= detail_form.text_field :first_name, id: "first_name", class: "profile-fields", placeholder: "Your first name" %>
                   </div>
                   <div class="w-full">
-                    <label for="last_name" class="block mb-2 text-sm font-medium text-indigo-900">Your last name</label>
-                    <%= detail_form.text_field :last_name, id: "last_name", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "Your last name" %>
+                    <label for="last_name" class="profile-label">Your last name</label>
+                    <%= detail_form.text_field :last_name, id: "last_name", class: "profile-fields", placeholder: "Your last name" %>
                   </div>
                 </div>
                 <% end %>
                 <div class="mb-2 sm:mb-6">
-                  <label for="email" class="block mb-2 text-sm font-medium text-indigo-900">Your email</label>
-                  <div class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"><%= current_user.email %></div>
+                  <label for="email" class="profile-label">Your email</label>
+                  <div class="profile-fields"><%= current_user.email %></div>
                 </div>
                 <% if 1==2 && devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
                 <% end %>
                 <%= f.fields_for :user_detail do |detail_form| %>
                 <div class="mb-2 sm:mb-6">
-                  <label for="profession" class="block mb-2 text-sm font-medium text-indigo-900">Profession</label>
-                  <%= detail_form.text_field :profession, id: "profession", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder:"your profession" %>
+                  <label for="profession" class="profile-label">Profession</label>
+                  <%= detail_form.text_field :profession, id: "profession", class: "profile-fields", placeholder:"your profession" %>
                 </div>
                 <div class="mb-2 sm:mb-6">
-                  <label for="birthday" class="block mb-2 text-sm font-medium text-indigo-900">Birthday</label>
-                  <div class="flex w-full">
-                    <%= detail_form.date_select(:birthday, html_options = {class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"}) %>
+                  <label for="birthday" class="profile-label">Birthday</label>
+                  <div class="flex flex-row data-select bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 w-full px-2.5">
+                    <%= detail_form.date_select(:birthday) %>
                   </div>
                 </div>
                 <div class="mb-2 sm:mb-6">
-                  <label for="gender" class="block mb-2 text-sm font-medium text-indigo-900">Gender</label>
+                  <label for="gender" class="profile-label">Gender</label>
                   <%= detail_form.select :gender, options_for_select(UserDetail.genders.keys.map { |gender| [gender.titleize, gender] }, current_user.user_detail.gender),
-                    { include_blank: 'Select Gender' }, { class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5" } %>
+                    { include_blank: 'Select Gender' }, { class: "profile-fields" } %>
                 </div>
                 <div class="mb-2 sm:mb-6">
-                  <label for="phone_number" class="block mb-2 text-sm font-medium text-indigo-900">Phone Number</label>
-                  <%= detail_form.text_field :phone_number, id: "phone_number", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder:"Phone Number" %>
+                  <label for="phone_number" class="profile-label">Phone Number</label>
+                  <%= detail_form.text_field :phone_number, id: "phone_number", class: "profile-fields", placeholder:"Phone Number" %>
                 </div>
                 <div class="mb-2 sm:mb-6">
-                  <label for="website" class="block mb-2 text-sm font-medium text-indigo-900">Website</label>
-                  <%= detail_form.text_field :website, id: "website", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder:"Website" %>
+                  <label for="website" class="profile-label">Website</label>
+                  <%= detail_form.text_field :website, id: "website", class: "profile-fields", placeholder:"Website" %>
                 </div>
                 <div class="mb-6">
-                  <label for="message" class="block mb-2 text-sm font-medium text-indigo-900">Bio</label>
+                  <label for="message" class="profile-label">Bio</label>
                   <%= detail_form.text_area :bio, rows: "4", class: "block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500", placeholder: "Write your bio here..." %>
                 </div>
                 <% end %>
                 <!-- Add Address Fields -->
                 <%= f.fields_for :address do |address_form| %>
                   <div class="mb-2 sm:mb-6">
-                    <label for="street_address" class="block mb-2 text-sm font-medium text-indigo-900">Street Address</label>
-                    <%= address_form.text_field :street_address, id: "street_address", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "Street Address" %>
+                    <label for="street_address" class="profile-label">Street Address</label>
+                    <%= address_form.text_field :street_address, id: "street_address", class: "profile-fields", placeholder: "Street Address" %>
                   </div>
                   <div class="mb-2 sm:mb-6">
-                    <label for="city" class="block mb-2 text-sm font-medium text-indigo-900">City</label>
-                    <%= address_form.text_field :city, id: "city", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "City" %>
+                    <label for="city" class="profile-label">City</label>
+                    <%= address_form.text_field :city, id: "city", class: "profile-fields", placeholder: "City" %>
                   </div>
                   <div class="mb-2 sm:mb-6">
-                    <label for="state" class="block mb-2 text-sm font-medium text-indigo-900">State</label>
-                    <%= address_form.text_field :state, id: "state", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "State" %>
+                    <label for="state" class="profile-label">State</label>
+                    <%= address_form.text_field :state, id: "state", class: "profile-fields", placeholder: "State" %>
                   </div>
                   <div class="mb-2 sm:mb-6">
-                    <label for="zip_code" class="block mb-2 text-sm font-medium text-indigo-900">Zip Code</label>
-                    <%= address_form.text_field :zip_code, id: "zip_code", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "Zip Code" %>
+                    <label for="zip_code" class="profile-label">Zip Code</label>
+                    <%= address_form.text_field :zip_code, id: "zip_code", class: "profile-fields", placeholder: "Zip Code" %>
                   </div>
                   <div class="mb-2 sm:mb-6">
-                    <label for="country" class="block mb-2 text-sm font-medium text-indigo-900">Country</label>
-                    <%= address_form.text_field :country, id: "country", class: "bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5", placeholder: "Country" %>
+                    <label for="country" class="profile-label">Country</label>
+                    <%= address_form.text_field :country, id: "country", class: "profile-fields", placeholder: "Country" %>
                   </div>
                 <% end %>
 
@@ -111,7 +111,7 @@
                   <%= f.password_field :current_password, id:"current_password", class: "bg-red-50 border border-red-300 text-red-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5", placeholder: "Current password required to save changes" %>
                 </div>
                 <div class="flex justify-end">
-                  <%= f.submit "Apply Changes", class: "cursor-pointer text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800" %>
+                  <%= f.submit "Apply Changes", class: "submit-button" %>
                 </div>
               </div>
             </div>

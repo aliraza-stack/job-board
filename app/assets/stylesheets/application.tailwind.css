@@ -11,3 +11,20 @@
 }
 
 */
+
+
+.data-select > select {
+  @apply bg-indigo-50 border-0 text-indigo-900 text-sm  block w-full p-2.5 focus:border-0 focus:ring-0;
+}
+
+.profile-fields {
+  @apply bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5;
+}
+
+.profile-label {
+  @apply block mb-2 text-sm font-medium text-indigo-900;
+}
+
+.submit-button {
+  @apply cursor-pointer text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800;
+}
