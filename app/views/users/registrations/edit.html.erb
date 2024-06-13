@@ -27,7 +27,7 @@
             <div class="grid max-w-2xl mx-auto mt-8">
               <div class="flex flex-col items-center justify-center space-y-5 sm:flex-row sm:space-y-0">
                 <% if current_user.avatar.attached? %>
-                  <%= image_tag current_user.avatar.variant(resize_to_fill: [160, 160]), class: "object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500", alt: "User Avatar" %>
+                  <%= image_tag current_user.avatar.variant(resize_to_fill: [500, 500]), class: "object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500", alt: "User Avatar" %>
                 <% else %>
                   <%= image_tag image_path("default.avif"), class: "object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300 dark:ring-indigo-500", alt: "Default Avatar" %>
                 <% end %>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="mb-2 sm:mb-6">
                   <label for="birthday" class="profile-label">Birthday</label>
-                  <div class="flex flex-row data-select bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 w-full px-2.5">
+                  <div class="flex data-select bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 w-full px-2.5">
                     <%= detail_form.date_select(:birthday) %>
                   </div>
                 </div>

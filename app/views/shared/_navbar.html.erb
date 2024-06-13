@@ -5,8 +5,6 @@
     </a>
 
     <div data-controller="dropdowns" class="relative flex items-center md:order-2 space-x-3 md:space-x-0 gap-4">
-
-
       <% if user_signed_in? %>
         <button type="button" class="flex text-sm bg-gray-200 pr-6 pl-3 py-1 gap-4 items-center rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 hover:ring-base-300" id="user-menu-button" aria-expanded="false" data-action="click->dropdowns#toggle">
           <span class="sr-only">Open user menu</span>
@@ -24,9 +22,6 @@
           <%# else %>
           <%# end %>
       <% end %>
-
-
-
       <!-- Dropdown menu -->
       <div
         class="transition transform origin-top-right absolute min-w-56 right-0 top-7 z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown"
