@@ -7,7 +7,7 @@ class CreateUserDetails < ActiveRecord::Migration[7.1]
       t.string :profession
       t.text :bio
       t.date :birthday
-      t.string :gender
+      t.string :gender, default: 'male'
       t.string :phone_number
       t.string :website
 

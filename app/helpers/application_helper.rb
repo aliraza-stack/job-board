@@ -1,13 +1,10 @@
 module ApplicationHelper
 
-  # def full_name
-  #   if !current_user.first_name.empty? && !current_user.last_name.empty?
-  #     first = current_user.first_name
-  #     last = current_user.last_name
-  #     name = first + " " + last
-  #   else
-  #     name = "Job Board"
-  #   end
-  #   name
-  # end
+  def full_name
+    if current_user.user_detail.present? && current_user.user_detail.first_name.present? && current_user.user_detail.last_name.present?
+      "#{current_user.user_detail.first_name} #{current_user.user_detail.last_name}"
+    else
+      current_user.email.split('@').first.capitalize
+    end
+  end
 end

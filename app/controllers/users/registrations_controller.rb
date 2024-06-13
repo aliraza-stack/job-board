@@ -5,6 +5,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
   before_action :build_user_detail, only: [:edit]
   before_action :build_address, only: [:edit]
+  skip_before_action :check_profile_completion, only: :update
+
 
   # GET /resource/sign_up
   # def new
@@ -79,7 +81,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:current_password, :role, :avatar, user_detail_attributes: [:first_name, :last_name, :profession, :bio, :birthday, :gender, :phone_number, :website, :id], address_attributes: [:id, :street_address, :city, :state, :zip_code, :country]])
+    devise_parameter_sanitizer.permit(:account_update,
+                                      keys: [:current_password, :role, :avatar,
+                                             user_detail_attributes: [:first_name, :last_name, :profession, :bio, :birthday, :gender, :phone_number, :website, :id],
+                                             address_attributes: [:id, :street_address, :city, :state, :zip_code, :country]
+                                      ])
   end
 
   # The path used after sign up.
@@ -87,15 +93,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
   # def after_sign_in_path_for(resource)
-  #   if resource.admin?
-  #     admin_dashboard_path
-  #   elsif resource.employer?
-  #     employer_dashboard_path
-  #   elsif resource.freelancer?
-  #     freelancer_dashboard_path
-  #   else
-  #     root_path
-  #   end
+  #   super(resource)
   # end
 
   # The path used after sign up for inactive accounts.
@@ -108,5 +106,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def build_address
     resource.build_address unless resource.address
+  end
+
+  def after_update_path_for(resource)
+    edit_user_registration_path
   end
 end

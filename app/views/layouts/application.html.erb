@@ -13,8 +13,10 @@
 
   <body>
 
-      <%= render "shared/navbar" %>
       <%= render "shared/alerts" %>
+      <% if !user_signed_in? %>
+        <%= render "shared/navbar" %>
+      <% end %>
 
 
     <%= yield %>
