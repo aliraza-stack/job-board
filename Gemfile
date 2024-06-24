@@ -31,7 +31,7 @@ end
 
 group :development do
   gem "web-console"
-  gem "rack-mini-profiler"
+  # gem "rack-mini-profiler"
   gem "spring"
   gem "dotenv-rails"
   gem "better_errors"

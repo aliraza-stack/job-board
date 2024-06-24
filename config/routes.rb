@@ -8,7 +8,8 @@ Rails.application.routes.draw do
               unlock: 'unblock',
               # registration: 'register',
               sign_up: 'signup',
-              edit: 'settings'
+              edit: 'settings',
+
              },
             controllers: {
               sessions: 'users/sessions',

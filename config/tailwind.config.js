@@ -69,8 +69,8 @@ module.exports = {
     require("daisyui"),
   ],
   daisyui: {
-    themes: false, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
-    darkTheme: "light", // name of one of the included themes for dark mode
+    themes: true, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    darkTheme: "dark", // name of one of the included themes for dark mode
     base: true, // applies background color and foreground color for root element by default
     styled: true, // include daisyUI colors and design decisions for all components
     utils: true, // adds responsive and modifier utility classes
@@ -80,15 +80,15 @@ module.exports = {
     themes: [
       {
         jobBoardTheme: {
-          primary: "#007aff",
-          secondary: "#a8a29e",
-          accent: "#38bdf8",
-          neutral: "#111827",
-          "base-100": "#fff7ea",
-          info: "#00feff",
-          success: "#00b43e",
-          warning: "#ffac4a",
-          error: "#dc2626",
+          "primary": "#a200ff",
+          "secondary": "#002aff",
+          "accent": "#00d200",
+          "neutral": "#182f20",
+          "base-100": "#ffffff",
+          "info": "#00c1ff",
+          "success": "#00e5ba",
+          "warning": "#b75e00",
+          "error": "#ff7c82",
         },
       },
     ],
